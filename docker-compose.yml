@@ -1,0 +1,31 @@
+version: '3'
+services:
+  apache:
+    build:
+      context: ./apache/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./src/:/var/www/html/
+      - ./apache/php.ini:/usr/local/etc/php/php.ini
+      - ./apache/httpd.conf:/etc/apache2/apache2.conf
+  mysql:
+    build:
+      context: ./mysql/
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/mysql.cnf:/etc/mysql/my.cnf
+      - ./data/:/var/lib/mysql/
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: qwerty
