@@ -9,9 +9,9 @@ echo('</pre>');
 
 
 if(!empty($_POST)){
-	$customerName = validateRequiredField($_POST['customer_name']);
-	$customerEmail = validateRequiredField($_POST['customer_email']);
-	$customerPassword = md5(validateRequiredField($_POST['customer_password']));
+	$customerName = cleanFormText(validateRequiredField($_POST['customer_name']));
+	$customerEmail = cleanFormText(validateRequiredField($_POST['customer_email']));
+	$customerPassword = md5(cleanFormText(validateRequiredField($_POST['customer_password'])));
 	$mainAnswer = cleanFormText($_POST['main_answer']);
 	
 	if(isset($_POST['peel_color'])){
