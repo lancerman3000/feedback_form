@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -8,30 +12,45 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/main.css">
-	<title>Зарегистрируйтесь</title>
+	<title>Связаться с нами</title>
 </head>
 
 <body>
 	<div class="container-sm app">
-		<form class="registration_form" action="../php/new_customer_registration.php" method="post">
-			<h1 class="form_header">Зарегистрируйтесь чтобы мы смогли связаться с Вами</h1>
+		<form class="registration_form" action="../php/new_customer_registration.php" method="post"
+			enctype="multipart/form-data">
+			<h1 class="form_header">Зарегистрируйтесь чтобы мы смогли связаться</h1>
 			<div class="mb-3">
+				<?php 
+				if(isset($_SESSION['errorMessage'])){
+						echo '<div class="alert alert-danger">';
+						echo($_SESSION['errorMessage']); 
+						unset($_SESSION['errorMessage']);
+						echo '</div>';
+					}elseif(isset($_SESSION['succsessMessage'])){
+						echo '<div class="alert alert-success">';
+							echo($_SESSION['succsessMessage']); 
+							unset($_SESSION['succsessMessage']);
+							echo '</div>';
+					}
+					?>
+
 				<input class="form-control form-control-sm" type="text" name="customer_name" id="customer-name"
-					placeholder="Введите имя" required>
+					placeholder="Введите имя">
 			</div>
 			<div class="mb-3">
 				<input class="form-control form-control-sm" type="email" name="customer_email" id="customer-email"
-					placeholder="E-mail" required>
+					placeholder="E-mail">
 			</div>
 			<div class="mb-3">
 				<input class="form-control form-control-sm" type="password" name="customer_password"
-					id="customer-password" placeholder="Введите пароль" required>
+					id="customer-password" placeholder="Введите пароль">
 			</div>
 			<div class="mb-3">
 				<label for="main-answer">Ответ на главный вопрос жизни, вселенной и всего такого
 				</label>
 				<select class="form-select form-select-sm" name="main_answer" id="main-answer">
-					<option selected>Выберите правильный Ответ</option>
+					<option value="0" selected>Выберите правильный Ответ</option>
 					<option value="1">Бесконечность - не предел</option>
 					<option value="2">Сорок два</option>
 					<option value="3">Осёл</option>
@@ -73,7 +92,6 @@
 				<button type="reset" class="btn btn-outline-danger btn-sm">Сбросить</button>
 				<a href="../html/log_in_form.html" class="btn btn-outline-primary btn-sm">Войти</a>
 			</div>
-
 
 		</form>
 	</div>
