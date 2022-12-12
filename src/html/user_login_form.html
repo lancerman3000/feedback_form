@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
+<div?php if(empty($_SESSION)){ session_start(); error_reporting(0); } ?>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/main.css">
-	<title>Зарегистрируйтесь</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+		<link rel="stylesheet" href="../css/main.css">
+		<link rel="stylesheet" href="../css/animared_bg.css">
 
-<body>
-	<div class="container-sm app">
-		<form class="log_in_form" action="#" method="post">
-			<h1 class="form_header">Введите email и пароль чтобы войти</h1>
-			<div class="mb-3">
-				<input class="form-control form-control-sm" type="email" name="customer_email" id="customer-email"
-					placeholder="E-mail" required>
-			</div>
-			<div class="mb-3">
-				<input class="form-control form-control-sm" type="password" name="customer_password"
-					id="customer-password" placeholder="Введите пароль" required>
-			</div>
-			<div class="mb-3">
-				<button class="btn btn-outline-success btn-sm">Отправить</button>
-				<button class="btn btn-outline-danger btn-sm">Сбросить</button>
-				<a href="#" class="btn btn-outline-primary btn-sm">Войти</a>
-			</div>
+		<title>Войти</title>
+	</head>
+
+	<body>
+		<div class="container-sm app">
+			<form class="log_in_form" action="../php/login.php" method="post">
+				<h1 class="form_header">Введите email и пароль чтобы войти</h1>
+				<div class="mb-3">
+					<?php 
+				if(isset($_SESSION['errorMessage'])){
+						echo '<div class="alert alert-danger">';
+						echo($_SESSION['errorMessage']); 
+						unset($_SESSION['errorMessage']);
+						echo '</div>';
+					}elseif(isset($_SESSION['succsessMessage'])){
+						echo '<div class="alert alert-success">';
+							echo($_SESSION['succsessMessage']); 
+							unset($_SESSION['succsessMessage']);
+							echo '</div>';
+					}
+				if(isset($_SESSION['email_send_status'])){
+					echo($_SESSION['email_send_status']);
+					unset($_SESSION['email_send_status']);
+					echo('</div>');
+
+				}
+					?>
+					<input class="form-control form-control-sm" type="email" name="customer_email" id="customer-email"
+						placeholder="E-mail" required>
+				</div>
+				<div class="mb-3">
+					<input class="form-control form-control-sm" type="password" name="customer_password"
+						id="customer-password" placeholder="Введите пароль" required>
+				</div>
+				<div class="mb-3 btn-box">
+					<button type="submit" class="btn btn-outline-success btn-sm">Войти</button>
+					<button type="reset" class="btn btn-outline-danger btn-sm">Сбросить</button>
+					<a href="../php/reg_back.php" class="btn btn-outline-primary btn-sm">Регистрация</a>
+				</div>
 
 
-		</form>
-	</div>
-</body>
+			</form>
+		</div>
+		<div class='light x1'></div>
+		<div class='light x2'></div>
+		<div class='light x3'></div>
+		<div class='light x4'></div>
+		<div class='light x5'></div>
+		<div class='light x6'></div>
+		<div class='light x7'></div>
+		<div class='light x8'></div>
+		<div class='light x9'></div>
+	</body>
 
 </html>
